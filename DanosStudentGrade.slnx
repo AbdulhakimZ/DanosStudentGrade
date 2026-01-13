@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="danosstudentgrade.client/danosstudentgrade.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="DanosStudentGrade.Server/DanosStudentGrade.Server.csproj" />
+</Solution>
