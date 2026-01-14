@@ -1,14 +1,29 @@
-﻿:host {
-    max-width: 1280px;
-    padding: 2rem;
+﻿.main-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
 }
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+nav {
+    margin: 20px 0;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
 }
 
-table {
-    margin: 0 auto;
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+nav a.active {
+    color: #0056b3;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.content {
+    padding: 20px;
 }

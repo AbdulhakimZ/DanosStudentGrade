@@ -1,0 +1,26 @@
+<div class="container">
+    <h2>Student Averages</h2>
+    <div class="actions">
+        <button (click)="fetchData()" class="btn-primary">Load Data</button>
+        <button (click)="exportToExcel()" class="btn-export" [disabled]="studentAverages.length === 0">Export to
+            Excel</button>
+    </div>
+
+    <table class="table" *ngIf="studentAverages.length > 0; else noData">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Average Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of studentAverages">
+                <td>{{ student.studentName }}</td>
+                <td>{{ student.averageGrade | number:'1.1-2' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #noData>
+        <p>No data loaded yet.</p>
+    </ng-template>
+</div>
