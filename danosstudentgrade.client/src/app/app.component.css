@@ -1,4 +1,4 @@
-﻿.main-container {
+.main-container {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
 }
@@ -27,3 +27,22 @@ nav a.active {
 .content {
     padding: 20px;
 }
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--neutral-900);
+  background-color: white;
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast);
+}
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.25);
+  }

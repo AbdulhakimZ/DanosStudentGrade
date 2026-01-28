@@ -1,5 +1,6 @@
 using DanosStudentGrade.Server.Data;
 using DanosStudentGrade.Server.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace DanosStudentGrade.Server.Services
@@ -27,6 +28,7 @@ namespace DanosStudentGrade.Server.Services
             // Calculate average grade for each student
             var studentAverages = students.Select(s => new StudentAverageDto
             {
+                StudentId = s.Id,
                 StudentName = s.Name,
                 AverageGrade = grades.Where(g => g.Student_Id == s.Id).Select(g => g.GradeValue).DefaultIfEmpty(0).Average()
             }).ToList();
@@ -44,6 +46,13 @@ namespace DanosStudentGrade.Server.Services
                 StudentAverages = studentAverages,
                 CourseAverages = courseAverages
             };
+        }
+
+        public async Task<Student> SaveStudent(Student student)
+        {
+            var rs = _context.Add(student);
+            await _context.SaveChangesAsync();
+            return student;
         }
     }
 }

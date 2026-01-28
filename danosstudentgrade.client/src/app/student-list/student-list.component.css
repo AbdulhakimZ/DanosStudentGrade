@@ -104,3 +104,53 @@ p {
   font-style: italic;
   margin-top: 20px;
 }
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #1C1C1E;
+  background-color: white;
+  border: 1px solid #C7C7CC;
+  border-radius: 8px;
+  transition: border-color 150ms ease;
+}
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #0A84FF;
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.25);
+  }
+
+
+.profile-modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.profile-modal {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+  width: min(520px, 90vw);
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+  color: var(--neutral-800);
+}

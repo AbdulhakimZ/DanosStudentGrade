@@ -2,6 +2,7 @@ namespace DanosStudentGrade.Server.Models
 {
     public class StudentAverageDto
     {
+        public int StudentId { get; set; }
         public required string StudentName { get; set; }
         public double AverageGrade { get; set; }
     }

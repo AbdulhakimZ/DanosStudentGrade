@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 // Data transfer objects matching backend models
 export interface StudentAverageDto {
+  studentId: number;
   studentName: string;
   averageGrade: number;
 }
@@ -18,6 +19,20 @@ export interface DashboardDataDto {
   courseAverages: CourseAverageDto[];
 }
 
+export interface StudentDto {
+  Id: number;
+  Name: string;
+}
+
+export interface GradeItem {
+  subject: string;
+  gradeValue: number | null;
+}
+
+export interface GradeDto {
+  studentId: number;
+  grades: GradeItem[];
+}
 /**
  * Service for communicating with the backend API
  */
@@ -34,5 +49,12 @@ export class ApiService {
    */
   getDashboardData(): Observable<DashboardDataDto> {
     return this.http.get<DashboardDataDto>(this.apiUrl);
+  }
+
+  saveNewStudent(studentData: StudentDto): Observable<any> {
+    return this.http.post(`${this.apiUrl}/student`, studentData)
+  }
+  SaveGrade(newGrade: GradeDto): Observable<any> {
+    return this.http.post(`${this.apiUrl}/submitNewGrade`, newGrade)
   }
 }

@@ -1,3 +1,4 @@
+using DanosStudentGrade.Server.Models;
 using DanosStudentGrade.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,53 @@ namespace DanosStudentGrade.Server.Controllers
         {
             var data = await _service.GetDashboardDataAsync();
             return Ok(data);
+        }
+
+        [HttpPost("student")]
+        public async Task<IActionResult> SaveStudent([FromBody] Student studentDto)
+        {
+            if (studentDto == null)
+            {
+                return BadRequest("Student data is required");
+            }
+
+            if (string.IsNullOrWhiteSpace(studentDto.Name))
+            {
+                return BadRequest("Student name is required");
+            }
+            try
+            {
+                var savedStudent = await _service.SaveStudent(studentDto);
+                return CreatedAtAction(nameof(Get), new { id = savedStudent.Id }, savedStudent);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpPost("submitNewGrade")]
+        public async Task<IActionResult> SubmitNewGrade([FromBody] Student studentDto)
+        {
+            if (studentDto == null)
+            {
+                return BadRequest("Student data is required");
+            }
+
+            if (string.IsNullOrWhiteSpace(studentDto.Name))
+            {
+                return BadRequest("Student name is required");
+            }
+            try
+            {
+                var savedStudent = await _service.SaveStudent(studentDto);
+                return CreatedAtAction(nameof(Get), new { id = savedStudent.Id }, savedStudent);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }

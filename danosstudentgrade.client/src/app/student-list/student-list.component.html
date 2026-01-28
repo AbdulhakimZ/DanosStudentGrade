@@ -1,26 +1,87 @@
 <div class="container">
-    <h2>Student Averages</h2>
-    <div class="actions">
-        <button (click)="fetchData()" class="btn-primary">Load Data</button>
-        <button (click)="exportToExcel()" class="btn-export" [disabled]="studentAverages.length === 0">Export to
-            Excel</button>
+  <h2>Student Averages</h2>
+  <div class="actions">
+    <button (click)="fetchData()" class="btn-primary">Load Data</button>
+    <button (click)="exportToExcel()" class="btn-export" [disabled]="studentAverages.length === 0">
+      Export to
+      Excel
+    </button>
+    <button (click)="showModal()">Add New</button>
+  </div>
+
+  <input [(ngModel)]="filterText" (ngModelChange)="filter()" *ngIf="studentAverages.length > 0;" />
+  <table class="table" *ngIf="studentAverages.length > 0; else noData">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Average Grade</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of filteredData">
+        <td>{{ student.studentName }}</td>
+        <td>{{ student.averageGrade | number:'1.1-2' }}</td>
+        <td><button (click)="showResultModal();setStudentId(student.studentId)">Add Result</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noData>
+    <p>No data loaded yet.</p>
+  </ng-template>
+</div>
+
+<div *ngIf="isShowResultModal" class="profile-modal-backdrop">
+  <div class="profile-modal">
+    <h3>Add Result</h3>
+    <input [(ngModel)]="studentId" type="hidden"/>
+    <div>
+      <label>Math</label>
+      <input [(ngModel)]="newGrade.grades[0].gradeValue"
+             name="mathGrade" 
+             type="number" 
+             min="0" 
+             max="100"
+             placeholder="Math Result" />
+    </div>
+    <div>
+      <label>Physics</label>
+      <input [(ngModel)]="newGrade.grades[1].gradeValue"
+             name="physicsGrade" 
+             type="number" 
+             min="0" 
+             max="100"
+             placeholder="Physics Result" />
+    </div>
+    <div>
+      <label>Chemistry</label>
+      <input [(ngModel)]="newGrade.grades[2].gradeValue"
+             name="chemistryGrade" 
+             type="number" 
+             min="0" 
+             max="100"
+             placeholder="Chemistry Result" />
     </div>
 
-    <table class="table" *ngIf="studentAverages.length > 0; else noData">
-        <thead>
-            <tr>
-                <th>Student Name</th>
-                <th>Average Grade</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let student of studentAverages">
-                <td>{{ student.studentName }}</td>
-                <td>{{ student.averageGrade | number:'1.1-2' }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <ng-template #noData>
-        <p>No data loaded yet.</p>
-    </ng-template>
+    <div class="actions">
+      <button (click)="saveResult()">Save</button>
+      <button (click)="showResultModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isShowModal" class="profile-modal-backdrop">
+  <div class="profile-modal">
+    <h3>Add Student</h3>
+    <div>
+      <label>StudentName</label>
+      <input [(ngModel)]="newData.Name"
+             placeholder="Student name" />
+    </div>
+
+    <div class="actions">
+      <button (click)="saveNew()">Save</button>
+      <button (click)="showModal()">Cancel</button>
+    </div>
+  </div>
 </div>
